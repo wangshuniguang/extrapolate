@@ -65,7 +65,7 @@ export default function Navbar() {
               height="191"
               className="mr-2 size-[30px] rounded-sm"
             />
-            <p>Extrapolate</p>
+            <p>NiG AI</p>
           </Link>
           <div>
             {userData ? (

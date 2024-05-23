@@ -81,7 +81,7 @@ export function UploadDialog() {
             />
           </a>
           <DrawerTitle className="font-display text-2xl font-bold leading-normal tracking-normal">
-            Upload Photo
+            上传图片
           </DrawerTitle>
         </DrawerHeader>
 

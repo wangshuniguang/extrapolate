@@ -9,15 +9,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Steven
-        </a> and{" "}
-        <a
-          className="font-semibold text-gray-600 underline-offset-4 transition-colors hover:underline"
-          href="https://twitter.com/ajayvignesh01"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ajay
+          wangshu
         </a>
       </p>
     </div>

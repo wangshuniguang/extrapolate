@@ -9,7 +9,6 @@ import PhotoBooth from "@/components/home/photo-booth";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UploadDialog, useUploadDialog } from "@/components/home/upload-dialog";
-import { FAQ } from "@/components/home/faq";
 import { useUserDataStore } from "@/components/layout/navbar";
 import { useSignInDialog } from "@/components/layout/sign-in-dialog";
 import { useCheckoutDialog } from "@/components/layout/checkout-dialog";
@@ -21,7 +20,7 @@ export default function HomePage({ count }: { count: number | null }) {
   const userData = useUserDataStore((s) => s.userData);
   return (
     <div className="flex flex-col items-center justify-center">
-      <UploadDialog />
+      {/* <UploadDialog /> */}
       <motion.div
         className="z-10 max-w-2xl px-5 xl:px-0"
         initial="hidden"
@@ -41,15 +40,14 @@ export default function HomePage({ count }: { count: number | null }) {
           className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
-          <Balancer>See how well you age with AI</Balancer>
+          <Balancer>NiG 搜搜</Balancer>
         </motion.h1>
         <motion.p
           className="mt-6 text-center text-gray-500 md:text-xl"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           <Balancer ratio={0.6}>
-            Curious how you&apos;ll look in 10 years? 20 years? When you&apos;re
-            90 years old? Upload a photo and find out!
+            录制你的有声表情包
           </Balancer>
         </motion.p>
         <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-4">
@@ -57,17 +55,19 @@ export default function HomePage({ count }: { count: number | null }) {
             <Button
               className="space-x-2 rounded-full border border-primary transition-colors hover:bg-primary-foreground hover:text-primary"
               onClick={() => {
-                if (!userData) {
-                  setShowSignInModal(true);
-                } else if (userData.credits < 10) {
-                  setShowCheckoutModal(true);
-                } else {
-                  setShowUploadModal(true);
-                }
+                // if (!userData) {
+                //   setShowSignInModal(true);
+                // } else if (userData.credits < 10) {
+                //   setShowCheckoutModal(true);
+                // } else {
+                //   setShowUploadModal(true);
+                // }
+
+                setShowUploadModal(true);
               }}
             >
               <Upload className="h-5 w-5" />
-              <p>Upload a Photo</p>
+              <p>上传一张照片</p>
             </Button>
 
             <Link href={"/gallery"}>
@@ -81,27 +81,25 @@ export default function HomePage({ count }: { count: number | null }) {
                 }}
               >
                 <Images className="h-5 w-5" />
-                <p>My Gallery</p>
+                <p>我的表情包</p>
               </Button>
             </Link>
           </div>
           <p className="mt-2 text-center text-sm text-gray-500">
             {count && count > 0
               ? `${nFormatter(370986 + count)} photos generated and counting!`
-              : "Generate your photo now!"}
+              : "马上生成表情包!"}
           </p>
         </motion.div>
         <PhotoBooth
           // input={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/data/input.jpg`}
-          input="https://images.extrapolate.workers.dev/input.jpg"
+          input="00001-3343821466.png"
           // blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALjj/4mIh+P+/9Lv/wCn0+xeLxV9cWWUtL0AUz0tKQAAeVU0j4d/y2cTsDiuaawAAAAASUVORK5CYII="
           // output={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/data/output.gif`}
-          output="https://images.extrapolate.workers.dev/output.gif"
+          output="12345.mp4"
           className="h-[350px] sm:h-[600px] sm:w-[600px]"
         />
       </motion.div>
-
-      <FAQ />
     </div>
   );
 }

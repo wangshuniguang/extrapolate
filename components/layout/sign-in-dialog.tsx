@@ -58,7 +58,7 @@ export function SignInDialog() {
               />
             </a>
             <DialogTitle className="font-display text-2xl font-bold leading-normal tracking-normal">
-              Sign In
+              登录
             </DialogTitle>
             <DialogDescription className="text-center">
               By signing up, you agree to our Terms of Service and Privacy

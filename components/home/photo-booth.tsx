@@ -68,7 +68,7 @@ export default function PhotoBooth({
         className="hover:bg-secondary absolute left-5 top-5 z-20 rounded-full border transition-all hover:scale-105 active:scale-95"
       >
         <p className="text-muted-foreground font-semibold">
-          {api?.selectedScrollSnap() === 1 ? "View original" : "View result"}
+          {api?.selectedScrollSnap() === 1 ? "查看原图" : "查看结果"}
         </p>
       </Button>
       {/*
@@ -91,10 +91,13 @@ export default function PhotoBooth({
               .then((response) => response.blob())
               .then((blob) => {
                 let blobUrl = window.URL.createObjectURL(blob);
-                forceDownload(
-                  blobUrl,
-                  `${id || "demo"}.${current === 1 ? "gif" : ""}`,
-                );
+                // 创建视频元素并设置其源为 blob URL
+                const videoElement = document.createElement('video');
+                videoElement.src = blobUrl;
+                videoElement.controls = true; // 添加控件以便用户可以控制视频播放
+                videoElement.autoplay = true; // 自动播放视频
+                // 将视频元素添加到 DOM 中
+                document.body.appendChild(videoElement);
                 setDownloading(false);
               })
               .catch((e) => console.error(e));
@@ -135,8 +138,8 @@ export default function PhotoBooth({
             <Card className="flex aspect-square items-center justify-center overflow-hidden rounded-2xl">
               {failed ? (
                 <p className="text-center text-sm text-red-500">
-                  Failed to run - could not find face in image. Try another!{" "}
-                  <br /> 10 credits returned
+                  运行失败 - 在图像中找不到人脸. 重试!{" "}
+                  <br /> 返还10积分
                 </p>
               ) : !output ? (
                 <div className="flex flex-col items-center justify-center">
@@ -152,15 +155,17 @@ export default function PhotoBooth({
                       className="text-muted-foreground text-sm"
                       variants={FADE_DOWN_ANIMATION_VARIANTS}
                     >
-                      This can take a minute to run.
+                      这可能需要一分钟才能运行.
                     </motion.p>
                   </motion.div>
                 </div>
               ) : (
-                <img
-                  alt="output image"
+                <video
+                  // alt="输出表情包"
                   src={output || ""}
-                  className="h-full object-cover"
+                  className="h-full object-cover" controls
+                  // autoPlay
+                  // loop
                 />
               )}
             </Card>
