@@ -7,10 +7,6 @@ import { UserDropdown } from "./user-dropdown";
 import { createClient } from "@/lib/supabase/client";
 import useSWRImmutable from "swr/immutable";
 import { Button } from "@/components/ui/button";
-import {
-  SignInDialog,
-  useSignInDialog,
-} from "@/components/layout/sign-in-dialog";
 import { Tables } from "@/lib/supabase/types_db";
 import { create } from "zustand";
 
@@ -27,28 +23,26 @@ export const useUserDataStore = create<UserDataStore>((set) => ({
 export default function Navbar() {
   const setUserData = useUserDataStore((s) => s.setUserData);
 
-  const supabase = createClient();
+  // const supabase = createClient();
 
-  const { data: userData, isLoading } = useSWRImmutable(
-    "userData",
-    async () => {
-      const { data: userData } = await supabase
-        .from("users")
-        .select("*")
-        .single();
+  // const { data: userData, isLoading } = useSWRImmutable(
+  //   "userData",
+  //   async () => {
+  //     const { data: userData } = await supabase
+  //       .from("users")
+  //       .select("*")
+  //       .single();
 
-      setUserData(userData);
+  //     setUserData(userData);
 
-      return userData;
-    },
-  );
+  //     return userData;
+  //   },
+  // );
 
-  const setShowSignInDialog = useSignInDialog((s) => s.setOpen);
   const scrolled = useScroll(50);
 
   return (
     <>
-      <SignInDialog />
       <div
         className={`fixed top-0 w-full ${
           scrolled
@@ -68,19 +62,6 @@ export default function Navbar() {
             <p>NiG AI</p>
           </Link>
           <div>
-            {userData ? (
-              <UserDropdown userData={userData} />
-            ) : (
-              !isLoading && (
-                <Button
-                  size="sm"
-                  className="rounded-full border border-primary transition-all hover:bg-primary-foreground hover:text-primary"
-                  onClick={() => setShowSignInDialog(true)}
-                >
-                  Sign In
-                </Button>
-              )
-            )}
           </div>
         </div>
       </div>

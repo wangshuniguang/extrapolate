@@ -92,7 +92,7 @@ export function UploadDialog() {
 
         <DrawerFooter className="bg-muted">
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">取消</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

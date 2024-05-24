@@ -15,10 +15,6 @@ import { Coins, CreditCard, LogOut, Receipt, Trash2 } from "lucide-react";
 import { billing } from "@/app/actions/billing";
 import { LoadingDots } from "@/components/shared/icons";
 import {
-  CheckoutDialog,
-  useCheckoutDialog,
-} from "@/components/layout/checkout-dialog";
-import {
   DeleteAccountDialog,
   useDeleteAccountDialog,
 } from "@/components/layout/delete-account-dialog";
@@ -56,14 +52,12 @@ export function UserDropdown({ userData }: { userData: UserData | null }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setShowCheckoutDialog = useCheckoutDialog((s) => s.setOpen);
   const [isPending, startTransition] = useTransition();
 
   if (!email) return null;
 
   return (
     <>
-      <CheckoutDialog />
       <DeleteAccountDialog />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
