@@ -28,7 +28,7 @@ export default function NotFound() {
           className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
-          Your Results
+          您的表情包
         </motion.h1>
 
         <motion.div
@@ -36,12 +36,12 @@ export default function NotFound() {
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
           <p className="text-muted-foreground text-sm">
-            Photo not found, please upload a new one.
+          未找到表情包，请上传一张新的。
           </p>
           <Link href="/">
             <Button className="hover:bg-primary-foreground hover:text-primary border-primary group mt-6 space-x-2 rounded-full border transition-colors">
               <Upload className="h-5 w-5 text-white group-hover:text-black" />
-              <p>Upload another photo</p>
+              <p>上传新的照片</p>
             </Button>
           </Link>
         </motion.div>
