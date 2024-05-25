@@ -92,7 +92,7 @@ export function UploadDialog() {
 
         <DrawerFooter className="bg-muted">
           <DrawerClose asChild>
-            <Button variant="outline">取消</Button>
+            <Button variant="outline">Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -107,8 +107,13 @@ export function UploadForm() {
     image: null,
   });
 
-  const [fileSizeTooBig, setFileSizeTooBig] = useState(false);
+  const [audio, setAudio] = useState<{
+    audio: string | null;
+  }>({
+    audio: null
+  });
 
+  const [fileSizeTooBig, setFileSizeTooBig] = useState(false);
   const [dragActive, setDragActive] = useState(false);
 
   const onChangePicture = useCallback(
@@ -128,6 +133,25 @@ export function UploadForm() {
       }
     },
     [setData],
+  );
+
+  const onChangeAudio = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFileSizeTooBig(false);
+      const file = event.currentTarget.files && event.currentTarget.files[0];
+      if (file) {
+        if (file.size / 1024 / 1024 > 5) {
+          setFileSizeTooBig(true);
+        } else {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setAudio((prev) => ({ ...prev, audio: e.target?.result as string }));
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    },
+    [setAudio],
   );
 
   // Move to useActionState in future release of Next.js
@@ -235,17 +259,38 @@ export function UploadForm() {
         {state?.message && <p className="text-destructive">{state.message}</p>}
       </div>
 
-      <UploadButton data={data} />
+      
+      <div>
+        <div className="flex items-center justify-between">
+          <p className="block text-sm font-medium text-gray-700">Audio</p>
+        </div>
+        <input
+          id="audio-upload"
+          name="audio"
+          type="file"
+          accept="audio/*"
+          className="mt-2"
+          onChange={onChangeAudio}
+        />
+        {audio.audio && (
+          <audio controls className="mt-2">
+            <source src={audio.audio} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        )}
+      </div>
+
+      <UploadButton data={data} audio={audio} />
     </form>
   );
 }
 
-export function UploadButton({ data }: { data: { image: string | null } }) {
+export function UploadButton({ data, audio }: { data: { image: string | null }, audio: {audio: string | null} }) {
   const { pending } = useFormStatus();
 
   const saveDisabled = useMemo(() => {
-    return !data.image || pending;
-  }, [data.image, pending]);
+    return !data.image || !audio.audio || pending;
+  }, [data.image, audio.audio, pending]);
 
   return (
     <Button variant="outline" disabled={saveDisabled} className="w-full">
