@@ -42,9 +42,10 @@ export function UploadDialog() {
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen} modal={true}>
-        <DialogContent className="gap-0 overflow-hidden p-0 md:rounded-2xl">
-          <DialogHeader className="items-center justify-center space-y-3 px-16 py-8">
-            <a href="https://precedent.dev">
+        {/* <DialogContent className="gap-0 overflow-hidden p-0 md:rounded-2xl"> */}
+        <DialogContent className="gap-0 p-0 md:rounded-2xl">
+          {/* <DialogHeader className="items-center justify-center space-y-3 px-16 py-8">
+            <a href="">
               <Image
                 src="/logo.png"
                 alt="Logo"
@@ -57,8 +58,7 @@ export function UploadDialog() {
               Upload Photo
             </DialogTitle>
           </DialogHeader>
-
-          <Separator />
+          <Separator /> */}
 
           {/* Upload */}
           <UploadForm />
@@ -71,7 +71,7 @@ export function UploadDialog() {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent className="rounded-t-2xl">
         <DrawerHeader className="flex flex-col items-center justify-center space-y-3 px-4 py-8">
-          <a href="https://precedent.dev">
+          <a href="">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -167,7 +167,7 @@ export function UploadForm() {
     >
       <div>
         <div className="flex items-center justify-between">
-          <p className="block text-sm font-medium text-gray-700">Photo</p>
+          <p className="block text-sm font-medium text-gray-700">图片</p>
           {fileSizeTooBig && (
             <p className="text-sm text-red-500">File size too big (max 5MB)</p>
           )}
@@ -230,10 +230,7 @@ export function UploadForm() {
               } h-7 w-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
             />
             <p className="mt-2 text-center text-sm text-gray-500">
-              Drag and drop or click to upload.
-            </p>
-            <p className="mt-2 text-center text-sm text-gray-500">
-              Recommended: 1:1 square ratio, with a clear view of your face
+              拖放或点击上传.
             </p>
             <span className="sr-only">Photo upload</span>
           </div>
@@ -262,7 +259,7 @@ export function UploadForm() {
       
       <div>
         <div className="flex items-center justify-between">
-          <p className="block text-sm font-medium text-gray-700">Audio</p>
+          <p className="block text-sm font-medium text-gray-700">音频</p>
         </div>
         <input
           id="audio-upload"
@@ -297,7 +294,7 @@ export function UploadButton({ data, audio }: { data: { image: string | null }, 
       {pending ? (
         <LoadingDots color="#808080" />
       ) : (
-        <p className="text-sm">Confirm upload</p>
+        <p className="text-sm">提交</p>
       )}
     </Button>
   );

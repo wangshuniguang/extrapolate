@@ -59,7 +59,7 @@ export default function Navbar() {
               height="191"
               className="mr-2 size-[30px] rounded-sm"
             />
-            <p>NiG AI</p>
+            <p>Ni搜搜</p>
           </Link>
           <div>
           </div>

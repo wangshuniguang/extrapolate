@@ -16,7 +16,7 @@ export default function HomePage({ count }: { count: number | null }) {
   const userData = useUserDataStore((s) => s.userData);
   return (
     <div className="flex flex-col items-center justify-center">
-      {/* <UploadDialog /> */}
+      <UploadDialog />
       <motion.div
         className="z-10 max-w-2xl px-5 xl:px-0"
         initial="hidden"
@@ -36,7 +36,7 @@ export default function HomePage({ count }: { count: number | null }) {
           className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem]"
           variants={FADE_DOWN_ANIMATION_VARIANTS}
         >
-          <Balancer>Ni搜搜</Balancer>
+        <Balancer>您的专属有声表情包</Balancer>
         </motion.h1>
         <motion.p
           className="mt-6 text-center text-gray-500 md:text-xl"

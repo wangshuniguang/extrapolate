@@ -96,7 +96,7 @@ export function UserDropdown({ userData }: { userData: UserData | null }) {
           </DropdownMenuItem>
 
           {/* Buy Credits */}
-          <DropdownMenuItem
+          {/* <DropdownMenuItem
             className="space-x-2"
             onSelect={() => {
               setShowCheckoutDialog(true);
@@ -104,7 +104,7 @@ export function UserDropdown({ userData }: { userData: UserData | null }) {
           >
             <CreditCard className="h-4 w-4" />
             <p className="text-sm">Buy Credits</p>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
 
           {/* Billing */}
           <DropdownMenuItem

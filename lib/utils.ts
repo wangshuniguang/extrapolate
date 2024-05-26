@@ -70,15 +70,6 @@ export const getURL = (input: string = "") => {
     : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${input}`;
 };
 
-export const getDomain = (input: string = "") => {
-  const domain =
-    process.env.NODE_ENV === "development"
-      ? // run `pnpm tunnel` and set TUNNEL_URL
-        process.env.TUNNEL_URL!
-      : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
-
-  return domain + input;
-};
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
