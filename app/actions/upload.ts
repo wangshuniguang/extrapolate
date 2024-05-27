@@ -46,8 +46,7 @@ export async function upload(previousState: any, formData: FormData) {
       console.log('Files uploaded successfully:', result);
       // Handle success
     } else {
-      const errorJson = await response.json();
-      console.error(`HTTP error! status: ${response.status}, message: ${errorJson.message}`);
+      console.log('bug response.');
     }
   } catch (error) {
     console.error('Error uploading files:', error);
