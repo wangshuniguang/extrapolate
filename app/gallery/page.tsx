@@ -4,7 +4,9 @@ import { GalleryPage } from "@/app/gallery/gallery-page";
 
 export default async function Gallery() {
   try {
-    const response = await fetch('http://101.37.145.99:8000/api/sound_emojis');
+    const response = await fetch('http://101.37.145.99:8000/api/sound_emojis', {
+      cache: 'no-store' // 禁用缓存
+    });
     console.log('response: ' + response.status);
     if (response.ok) {
       const result = await response.json();
@@ -13,8 +15,8 @@ export default async function Gallery() {
         "created_at": em.gmt_create,
         "failed": false,
         "id": em.id,
-        "input": em.image_oss_path,
-        "output": em.video_oss_path,
+        "input": 'https://niguangnext.oss-cn-hangzhou.aliyuncs.com/' + em.image_oss_path,
+        "output": 'https://niguangnext.oss-cn-hangzhou.aliyuncs.com/' + em.video_oss_path,
         "user_id": em.user_id
       }));
 
