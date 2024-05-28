@@ -4,7 +4,9 @@ import { GalleryPage } from "@/app/gallery/gallery-page";
 
 export default async function Gallery() {
   try {
-    const response = await fetch('http://101.37.145.99:8000/api/sound_emojis');
+    const response = await fetch('http://101.37.145.99:8000/api/sound_emojis', {
+      cache: 'no-store' // 禁用缓存
+    });
     console.log('response: ' + response.status);
     if (response.ok) {
       const result = await response.json();
