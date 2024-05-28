@@ -13,8 +13,8 @@ export default async function Gallery() {
         "created_at": em.gmt_create,
         "failed": false,
         "id": em.id,
-        "input": em.image_oss_path,
-        "output": em.video_oss_path,
+        "input": 'https://niguangnext.oss-cn-hangzhou.aliyuncs.com/' + em.image_oss_path,
+        "output": 'https://niguangnext.oss-cn-hangzhou.aliyuncs.com/' + em.video_oss_path,
         "user_id": em.user_id
       }));
 
