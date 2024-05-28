@@ -34,7 +34,7 @@ export async function upload(previousState: any, formData: FormData) {
   console.log('start post request.');
 
   try {
-    const response = await fetch('http://localhost:8000/api/file/upload', {
+    const response = await fetch('http://101.37.145.99:8000/api/file/upload', {
       method: 'POST',
       body: postFormData,
     });
@@ -44,13 +44,17 @@ export async function upload(previousState: any, formData: FormData) {
     if (response.ok) {
       const result = await response.json();
       console.log('Files uploaded successfully:', result);
-      // Handle success
     } else {
       console.log('bug response.');
+      return { message: "Prediction error generating mp4", status: 500 };
     }
   } catch (error) {
     console.error('Error uploading files:', error);
+    return {
+      message: "Unexpected error generating gif, please try again",
+      status: 500,
+    };
   }
 
-  redirect(`/`);
+  redirect(`/gallery`);
 }
