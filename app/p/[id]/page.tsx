@@ -9,23 +9,7 @@ import { notFound } from "next/navigation";
 //   return [];
 // }
 
-async function getData(id: string) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data } = await supabase
-    .from("data")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (!data) return notFound();
-
-  return data;
-}
-
 export default async function Photo({ params }: { params: { id: string } }) {
   const { id } = params;
-  const fallbackData = await getData(id);
-
   return <PhotoPage id={id} data={fallbackData} />;
 }

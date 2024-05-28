@@ -3,36 +3,31 @@ import { cookies } from "next/headers";
 import { GalleryPage } from "@/app/gallery/gallery-page";
 
 export default async function Gallery() {
-  // const cookieStore = cookies();
-  // const supabase = createClient(cookieStore);
-  // const {
-  //   data: { session },
-  // } = await supabase.auth.getSession();
-  // const { data } = await supabase
-  //   .from("data")
-  //   .select("*")
-  //   .order("created_at", { ascending: false })
-  //   .match({ user_id: session?.user.id || "", failed: false });
+  try {
+    const response = await fetch('http://101.37.145.99:8000/api/sound_emojis');
+    console.log('response: ' + response.status);
+    if (response.ok) {
+      const result = await response.json();
+      console.log('Query sound emojis successfully:', result);
+      const data = result.map(em => ({
+        "created_at": em.gmt_create,
+        "failed": false,
+        "id": em.id,
+        "input": em.image_oss_path,
+        "output": em.video_oss_path,
+        "user_id": em.user_id
+      }));
 
-  const data = [
-    {
-      "created_at": "2023-01-01T00:00:00Z",
-      "failed": false,
-      "id": "1",
-      "input": "00001-3343821466.png",
-      "output": "12345.mp4",
-      "user_id": "1"
-    },
-    {
-      "created_at": "2023-01-02T00:00:00Z",
-      "failed": null,
-      "id": "2",
-      "input": "00001-3343821466.png",
-      "output": "12345.mp4",
-      "user_id": "1"
+      return <GalleryPage data={data} />;
+    } else {
+      console.log('Failed to query response.');
+      return { message: "Prediction error generating mp4", status: 500 };
     }
-  ]
-  
-
-  return <GalleryPage data={data} />;
+  } catch (error) {
+    console.error('Error uploading files:', error);
+    return {
+      message: "Unexpected error generating gif, please try again",
+      status: 500,
+    };
+  }
 }

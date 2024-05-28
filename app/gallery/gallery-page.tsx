@@ -17,7 +17,7 @@ export function GalleryPage({ data }: { data: DataProps[] | null }) {
           <div
             key={row.id}
             className="cursor-pointer transition-all hover:scale-[1.01]"
-            onClick={() => router.push(`/p/${row.id}`)}
+            //onClick={() => router.push(`/p/${row.id}`)}
           >
             <PhotoBooth
               id={row.id}
